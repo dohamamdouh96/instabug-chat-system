@@ -1,0 +1,54 @@
+version: '2'
+services:
+    db: 
+        image: mysql:5.7
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: instabug_chat_system_development
+            MYSQL_USER: root
+            MYSQL_PASSWORD: password
+        ports:
+            - "3307:3306"
+    db-test: 
+        image: mysql:5.7
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: instabug_chat_system_test
+            MYSQL_USER: root
+            MYSQL_PASSWORD: password
+        ports:
+            - "3308:3309"
+    app: 
+        build: .
+        command: bundle exec rails s -p 3000 -b '0.0.0.0'
+        volumes: 
+            - ".:/app"
+        ports: 
+            - "3000:3000"
+        depends_on:
+            - db
+        links:
+            - db
+        environment:
+            DB_USER: root
+            DB_NAME: instabug_chat_system_development
+            DB_PASSWORD: password
+            DB_HOST: db
+    app-test: 
+        build: .
+        command: bundle exec rails s -p 3000 -b '0.0.0.0'
+        volumes: 
+            - ".:/app-test"
+        ports: 
+            - "3001:3000"
+        depends_on:
+            - db-test
+        links:
+            - db-test
+        environment:
+            DB_USER: root
+            DB_NAME: instabug_chat_system_test
+            DB_PASSWORD: password
+            DB_HOST: db-test
