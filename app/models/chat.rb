@@ -13,4 +13,15 @@ class Chat < ApplicationRecord
       :application => {:only => [:token]}
     }}))   
   end
+
+  after_save :index_messages_in_elasticsearch
+
+  private
+
+  def index_messages_in_elasticsearch
+    messages.__elasticsearch__.create_index!(force: true)
+    messages.find_each { |message| message.__elasticsearch__.index_document }
+  end
+
+
 end

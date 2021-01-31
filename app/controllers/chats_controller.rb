@@ -7,9 +7,9 @@ class ChatsController < ApplicationController
     end
   
     def create
-        @application.chats.create!(
-          number: ApplicationRecord.increment_number(!application.chats),
-          application_id: !application.id
+        @chat = @application.chats.create!(
+          number: ApplicationRecord.increment_number(Chat.last),
+          application_id: @application.id
         )
         json_response(@chat, :created)
     end
