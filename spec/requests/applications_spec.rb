@@ -4,6 +4,7 @@ RSpec.describe 'Applications API', type: :request do
   let!(:applications) { create_list(:application, 10) }
   let(:application_token) { applications.first.token }
 
+  # Test suite for GET /applications
   describe 'GET /applications' do
     before { get '/applications' }
 
@@ -17,6 +18,7 @@ RSpec.describe 'Applications API', type: :request do
     end
   end
 
+  # Test suite for GET /applications/:token
   describe 'GET /applications/:token' do
     before { get "/applications/#{application_token}" }
 
@@ -32,7 +34,7 @@ RSpec.describe 'Applications API', type: :request do
     end
 
     context 'when the record does not exist' do
-      let(:application_token) { 100 }
+      let(:application_token) { '2ctkwUwo15RqFY5Z6WQu4' }
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
@@ -44,6 +46,7 @@ RSpec.describe 'Applications API', type: :request do
     end
   end
 
+  # Test suite for POST /applications
   describe 'POST /apllications' do
     let(:valid_attributes) { { name: 'Instabug' } }
 
@@ -60,7 +63,7 @@ RSpec.describe 'Applications API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/applications', params: { name: 'Foobar' } }
+      before { post '/applications', params: { name: '' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -73,22 +76,7 @@ RSpec.describe 'Applications API', type: :request do
     end
   end
 
-  describe 'PUT /applications/:token' do
-    let(:valid_attributes) { { name: 'Instabug' } }
-
-    context 'when the record exists' do
-      before { put "/applications/#{application_token}", params: valid_attributes }
-
-      it 'updates the record' do
-        expect(response.body).to be_empty
-      end
-
-      it 'returns status code 204' do
-        expect(response).to have_http_status(204)
-      end
-    end
-  end
-
+  # Test suite for DELETE /appplications/:token
   describe 'DELETE /applications/:token' do
     before { delete "/applications/#{application_token}" }
 
