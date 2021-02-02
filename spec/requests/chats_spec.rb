@@ -6,9 +6,9 @@ RSpec.describe 'Chats API' do
   let(:application_token) { application.token }
   let(:number) { chats.first.number }
 
-  # Test suite for GET /applications/:application_token/chats
-  describe 'GET /applications/:application_token/chats' do
-    before { get "/applications/#{application_token}/chats" }
+  # Test suite for GET /api/v1/applications/:application_token/chats
+  describe 'GET /api/v1/applications/:application_token/chats' do
+    before { get "/api/v1/applications/#{application_token}/chats" }
 
     context 'when chat exists' do
       it 'returns status code 200' do
@@ -33,9 +33,9 @@ RSpec.describe 'Chats API' do
     end
   end
 
-  # Test suite for GET /applications/:application_token/chats/:number
-  describe 'GET /applications/:application_token/chats/:number' do
-    before { get "/applications/#{application_token}/chats/#{number}" }
+  # Test suite for GET /api/v1/applications/:application_token/chats/:number
+  describe 'GET /api/v1/applications/:application_token/chats/:number' do
+    before { get "/api/v1/applications/#{application_token}/chats/#{number}" }
 
     context 'when application chat exists' do
       it 'returns status code 200' do
@@ -60,12 +60,12 @@ RSpec.describe 'Chats API' do
     end
   end
 
-  # Test suite for DELETE /applications/:application_token
-  describe 'DELETE /applications/:application_token' do
-    before { delete "/applications/#{application_token}/chats/#{number}" }
+  # Test suite for DELETE /api/v1/applications/:application_token/chats/chats/:number
+  describe 'DELETE /api/v1/applications/:application_token/chats/:number' do
+    before { delete "/api/v1/applications/#{application_token}/chats/#{number}" }
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
     end
   end
 end

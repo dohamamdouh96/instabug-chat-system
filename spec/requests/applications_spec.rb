@@ -4,9 +4,9 @@ RSpec.describe 'Applications API', type: :request do
   let!(:applications) { create_list(:application, 10) }
   let(:application_token) { applications.first.token }
 
-  # Test suite for GET /applications
-  describe 'GET /applications' do
-    before { get '/applications' }
+  # Test suite for GET /api/v1/applications
+  describe 'GET /api/v1/applications' do
+    before { get '/api/v1/applications' }
 
     it 'returns applications' do
       expect(json).not_to be_empty
@@ -18,9 +18,9 @@ RSpec.describe 'Applications API', type: :request do
     end
   end
 
-  # Test suite for GET /applications/:token
-  describe 'GET /applications/:token' do
-    before { get "/applications/#{application_token}" }
+  # Test suite for GET /api/v1/applications/:token
+  describe 'GET /api/v1/applications/:token' do
+    before { get "/api/v1/applications/#{application_token}" }
 
     context 'when the record exists' do
       it 'returns the application' do
@@ -46,12 +46,12 @@ RSpec.describe 'Applications API', type: :request do
     end
   end
 
-  # Test suite for POST /applications
-  describe 'POST /apllications' do
+  # Test suite for POST /api/v1/applications
+  describe 'POST /api/v1/apllications' do
     let(:valid_attributes) { { name: 'Instabug' } }
 
     context 'when the request is valid' do
-      before { post '/applications', params: valid_attributes }
+      before { post '/api/v1/applications', params: valid_attributes }
 
       it 'creates an application' do
         expect(json['name']).to eq('Instabug')
@@ -63,7 +63,7 @@ RSpec.describe 'Applications API', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/applications', params: { name: '' } }
+      before { post '/api/v1/applications', params: { name: '' } }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -77,11 +77,11 @@ RSpec.describe 'Applications API', type: :request do
   end
 
   # Test suite for DELETE /appplications/:token
-  describe 'DELETE /applications/:token' do
-    before { delete "/applications/#{application_token}" }
+  describe 'DELETE /api/v1/applications/:token' do
+    before { delete "/api/v1/applications/#{application_token}" }
 
-    it 'returns status code 204' do
-      expect(response).to have_http_status(204)
+    it 'returns status code 200' do
+      expect(response).to have_http_status(200)
     end
   end
 end

@@ -1,6 +1,7 @@
 FactoryBot.define do
-    factory :chat do
+    factory :message do
       number { Faker::Number.unique.number(digits:4) }
-      association :application
+      body { Faker::Lorem.word }
+      association :chat
     end
   end

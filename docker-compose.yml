@@ -1,6 +1,6 @@
 version: '2'
 services:
-    db: 
+    mysql: 
         image: mysql:5.7
         restart: always
         environment:
@@ -12,26 +12,49 @@ services:
             - "3307:3306"
         links:
             - elasticsearch
-
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis:/data
     elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
-        hostname: elasticsearch
+        image: elasticsearch:7.10.1
         ports:
             - "9200:9200"
+            - "9300:9300"
+        environment:
+            - discovery.type=single-node
+            - cluster.name=docker-cluster
+            - bootstrap.memory_lock=true
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        volumes:
+            - elasticsearch:/usr/share/elasticsearch/data
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1
     app: 
         build: .
-        command: bundle exec rails s -p 3000 -b '0.0.0.0'
+        command: bash -c "rm -f tmp/pids/server.pid && rake db:create && rake db:migrate:reset && rake db:seed && bundle exec rails s -p 3000 -b '0.0.0.0'"
         volumes: 
-            - ".:/app"
+            - ".:/app" 
         ports: 
             - "3001:3000"
         depends_on:
-            - db
+            - mysql
+            - elasticsearch
+            - redis
         links:
-            - db
+            - mysql
+            - elasticsearch
+            - redis
         environment:
             DB_USER: root
             DB_NAME: instabug_chat_system_development
             DB_PASSWORD: password
-            DB_HOST: db
+            DB_HOST: mysql
             ELASTICSEARCH_URL: http://elasticsearch:9200
+volumes:
+    elasticsearch: {}
+    redis: {}

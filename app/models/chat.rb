@@ -1,9 +1,12 @@
 class Chat < ApplicationRecord
-  has_many :messages, dependent: :destroy
+  # after_save :index_messages_in_elasticsearch
+  has_many :messages ,-> { order(:number) }, dependent: :destroy
   belongs_to :application, counter_cache: true, :autosave => true
 
   validates_uniqueness_of :number
-  validates :number, presence: true, numericality: { more_than_or_equal_to: 1,  only_integer: true }
+  validates :number, 
+            presence: true, 
+            numericality: { more_than_or_equal_to: 1,  only_integer: true }
 
   def as_json(options = {})
     super(options.merge({ except: [
@@ -14,14 +17,16 @@ class Chat < ApplicationRecord
     }}))   
   end
 
-  after_save :index_messages_in_elasticsearch
+  REDIS_COUNTER_KEY = "#{self}:counter"
 
-  private
-
-  def index_messages_in_elasticsearch
-    messages.__elasticsearch__.create_index!(force: true)
-    messages.find_each { |message| message.__elasticsearch__.index_document }
+  def self.increment_count
+    RedisClient.redis.incr REDIS_COUNTER_KEY
   end
 
+  # private
 
+  # def index_messages_in_elasticsearch
+  #   messages.__elasticsearch__.create_index!(force: true)
+  #   messages.find_each { |message| message.__elasticsearch__.index_document }
+  # end
 end
