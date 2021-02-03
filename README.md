@@ -8,7 +8,7 @@ Instabug Back End Challenge
 Installation Steps: 
 
 * Clone or download the repo through https://github.com/dohamamdouh96/instabug-chat-system.git
-* Open your favorite terminal and cd to the directory of the repo
+* Open your favorite terminal and cd instabug-chat-system
 * Run command "docker-compose up", this will build:  
   - Mysql
   - Redis
@@ -24,27 +24,27 @@ Installation Steps:
   
     Index
     - Description: Fetch all the application
-    - Method:GET /api/v1/applications
+    - Method:GET /applications
     
     Create 
     - Description: Creates a new Application
-    - Method: POST /api/v1/applications
+    - Method: POST /applications
     - param: name in form 
     
     Show
     - Description: Fetches a single Application
-    - Method: GET /api/v1/applications/:token
+    - Method: GET /applications/:token
     - param: token in path 
 
     Update
     - Description: Updates an existing Application
-    - Method: PUT /api/v1/applications/:token
+    - Method: PUT /applications/:token
     - param: token in path
     - param: name in form
     
     Delete
     - Description: Deletes an existing Application
-    - Method: DELETE /api/v1/applications/:token
+    - Method: DELETE /applications/:token
     - param: token in path
 
 ***********************************************************
@@ -53,24 +53,24 @@ Installation Steps:
     
     Index
     - Description: Fetch all the application's chats
-    - Method:GET /api/v1/applications/:application_token/chats
+    - Method:GET /applications/:application_token/chats
     - param: application token in path
     - param: chat number in path
     
     Create
     - Description: Creates a new Chat
-    - Method: POST /api/v1/applications/:application_token/chats
+    - Method: POST /applications/:application_token/chats
     - param: application token in path 
     
     Show
     - Description: Fetches a single Chat
-    - Method: GET /api/v1/applications/:application_token/chats/:number
+    - Method: GET /applications/:application_token/chats/:number
     - param: application token in path
     - param: chat number in path
 
     Delete
     - Description: Deletes an existing Chat
-    - Method: DELETE /api/v1/applications/:application_token/chats/:number
+    - Method: DELETE /applications/:application_token/chats/:number
     - param: application token in path
     - param: chat number in path
 
@@ -81,35 +81,37 @@ Installation Steps:
     
     Index
     - Description: Fetch all the chat's messages
-    - Method:GET /api/v1/applications/:application_token/chats/:chat_number/messages
+    - Method:GET /applications/:application_token/chats/:chat_number/messages
     - param: application token in path
     - param: chat number in path
     
     Create
     - Description: Creates a new Message
-    - Method: POST /api/v1/applications/:application_token/chats/:chat_number/messages
+    - Method: POST /applications/:application_token/chats/:chat_number/messages
     - param: application token in path
     - param: chat number in path
     
     Show
     - Description: Fetches a single message
-    - Method: GET /api/v1/applications/:application_token/chats/:chat_number/messages/:number
+    - Method: GET /applications/:application_token/chats/:chat_number/messages/:number
     - param: application token in path
     - param: chat number in path
     - param: message number in path
 
     Delete
     - Description: Deletes an existing message
-    - Method: DELETE /api/v1/applications/:application_token/chats/:chat_number/messages/:number
+    - Method: DELETE /applications/:application_token/chats/:chat_number/messages/:number
     - param: application token in path
     - param: chat number in path
     - param: message number in path
     
     Search
     - Description: Search In Messages' bodies
-    - Method: DELETE /api/v1/applications/:application_token/chats/:chat_number/messages/search
+    - Method: DELETE /applications/:application_token/chats/:chat_number/messages/search
     - param: application token in path
     - param: chat number in path
     - param: body in form
 
 * You can also run the test suite with command "bundle exec rspec"
+
+And that's it!
