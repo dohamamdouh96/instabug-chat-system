@@ -112,6 +112,6 @@ Installation Steps:
     - param: chat number in path
     - param: body in form
 
-* You can also run the test suite with command "bundle exec rspec"
+* You can also run the test suite inside the app container with command "bundle exec rspec"
 
 And that's it!
