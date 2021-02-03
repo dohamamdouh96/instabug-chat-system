@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Instabug Back End Challenge
 
-Things you may want to cover:
+* Ruby version: 2.7.0
+* Ruby on Rails version: 5.2.4
 
-* Ruby version
+Installation Steps: 
 
-* System dependencies
+* Clone or download the repo through https://github.com/dohamamdouh96/instabug-chat-system.git
+* cd to the directory of the repo
+* Run command "docker-compose up", this will build:  
+  - Mysql
+  - Redis
+  - Elasticsearch
+  - Rails App
 
-* Configuration
+* Open Postman or your favorite platform for testing APIs.. and you are ready to go!
 
-* Database creation
+* 
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* You can also run the test suite with command "bundle exec rspec"
