@@ -1,15 +1,24 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "",
-  "resourcePath": "applications",
+  "basePath": "http://localhost:3001/api",
+  "resourcePath": "chats",
   "apis": [
     {
-      "path": "/api/v1/applications",
+      "path": "/api/v1/applications/{application_token}/chats",
       "operations": [
         {
-          "summary": "Fetches all User items",
-          "notes": "This lists all the applications",
+          "summary": "Fetches all Application chats",
+          "notes": "This lists all the Application chats",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "application_token",
+              "type": "string",
+              "description": "Application Token",
+              "required": true
+            }
+          ],
           "responseMessages": [
             {
               "code": 401,
@@ -22,22 +31,22 @@
               "message": "The request you made is not acceptable"
             }
           ],
-          "nickname": "Applications#index",
+          "nickname": "Chats#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/applications",
+      "path": "/api/v1/applications/{application_token}/chats",
       "operations": [
         {
-          "summary": "Creates a new Application",
+          "summary": "Creates a new Chat",
           "parameters": [
             {
-              "paramType": "form",
-              "name": "name",
+              "paramType": "path",
+              "name": "application_token",
               "type": "string",
-              "description": "Name",
+              "description": "Application Token",
               "required": true
             }
           ],
@@ -53,29 +62,36 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Applications#create",
+          "nickname": "Chats#create",
           "method": "post"
         }
       ]
     },
     {
-      "path": "/api/v1/applications/{token}",
+      "path": "/api/v1/applications/{application_token}/chats/{number}",
       "operations": [
         {
-          "summary": "Fetches a single Application",
+          "summary": "Fetches a single Chat",
           "parameters": [
             {
               "paramType": "path",
-              "name": "token",
+              "name": "application_token",
               "type": "string",
-              "description": null,
-              "required": false
+              "description": "Application Token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "number",
+              "type": "integer",
+              "description": "Chat Number",
+              "required": true
             }
           ],
           "responseMessages": [
             {
               "code": 200,
-              "responseModel": "Application",
+              "responseModel": "Chat",
               "message": "Success"
             },
             {
@@ -94,65 +110,22 @@
               "message": "Not Acceptable"
             }
           ],
-          "nickname": "Applications#show",
+          "nickname": "Chats#show",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/applications/{token}",
+      "path": "/api/v1/applications/{application_token}/chats/{number}",
       "operations": [
         {
-          "summary": "Updates an existing Application",
+          "summary": "Deletes an existing Chat",
           "parameters": [
             {
               "paramType": "path",
-              "name": "token",
+              "name": "number",
               "type": "integer",
-              "description": "Application Token",
-              "required": true
-            },
-            {
-              "paramType": "form",
-              "name": "name",
-              "type": "string",
-              "description": "Name",
-              "required": true
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "Not Acceptable"
-            }
-          ],
-          "nickname": "Applications#update",
-          "method": "patch"
-        }
-      ]
-    },
-    {
-      "path": "/api/v1/applications/{token}",
-      "operations": [
-        {
-          "summary": "Deletes an existing Application",
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "token",
-              "type": "integer",
-              "description": "Application Token",
+              "description": "Chat Number",
               "required": true
             }
           ],
@@ -168,7 +141,7 @@
               "message": "Not Found"
             }
           ],
-          "nickname": "Applications#destroy",
+          "nickname": "Chats#destroy",
           "method": "delete"
         }
       ]

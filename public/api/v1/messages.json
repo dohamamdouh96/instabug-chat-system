@@ -1,11 +1,11 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "http://localhost:3001",
+  "basePath": "http://localhost:3001/api",
   "resourcePath": "messages",
   "apis": [
     {
-      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages/search.json",
+      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages/search",
       "operations": [
         {
           "summary": "Search Message's body",
@@ -50,7 +50,7 @@
       ]
     },
     {
-      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages.json",
+      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages",
       "operations": [
         {
           "summary": "Fetches all Chats messages",
@@ -89,7 +89,7 @@
       ]
     },
     {
-      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages.json",
+      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages",
       "operations": [
         {
           "summary": "Creates a new Message",
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages/{number}.json",
+      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages/{number}",
       "operations": [
         {
           "summary": "Fetches a single Message",
@@ -189,7 +189,7 @@
       ]
     },
     {
-      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages/{number}.json",
+      "path": "/api/v1/applications/{application_token}/chats/{chat_number}/messages/{number}",
       "operations": [
         {
           "summary": "Deletes an existing Message",

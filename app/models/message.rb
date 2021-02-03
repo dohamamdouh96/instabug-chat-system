@@ -33,4 +33,5 @@ class Message < ApplicationRecord
     RedisClient.redis.incr REDIS_COUNTER_KEY
   end
 
+  # Message.import force: true
 end
