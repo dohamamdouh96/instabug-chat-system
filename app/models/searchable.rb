@@ -3,7 +3,7 @@ module Searchable
   
     included do
       include Elasticsearch::Model
-    #   include Elasticsearch::Model::Callbacks
+      include Elasticsearch::Model::Callbacks
   
         index_name 'messages'
         document_type 'message'
@@ -19,7 +19,7 @@ module Searchable
                 only: [:number, :body],
                 include: {
                     chat: {
-                    only: [:number]
+                        only: [:number]
                     }
                 }
             )

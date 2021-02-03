@@ -74,20 +74,20 @@ class MessagesController < ApplicationController
     end
 
     def search
-        if (params[:body])
+      if (!params[:body] || params[:body].blank?)
+        json_response(messages: @chat.messages, total: @chat.messages.size)
+      else
           @messages = @chat.messages.search(
-              query: {
-                multi_match: {
-                    query: params[:body],
-                    fields: ['body']
+            query: {
+              multi_match: {
+                  query: params[:body],
+                  fields: ['body']
                 }
-                }
-            ).results
+              }
+          ).results
 
           json_response(messages: @messages.results, total: @messages.total.value)
-        else
-          json_response(messages: @chat.messages, total: @chat.messages.size)
-        end
+      end
     end
    
     private
