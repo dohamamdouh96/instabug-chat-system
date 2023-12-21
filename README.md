@@ -1,6 +1,6 @@
 # README
 
-Instabug Back End Challenge
+Back End Challenge
 
 * Ruby version: 2.7.0
 * Ruby on Rails version: 5.2.4
@@ -8,7 +8,7 @@ Instabug Back End Challenge
 Installation Steps: 
 
 * Clone or download the repo through https://github.com/dohamamdouh96/instabug-chat-system.git
-* Open your favorite terminal and cd instabug-chat-system
+* Open the terminal and cd chat-system
 * Run command "docker-compose up", this will build:  
   - Mysql
   - Redis
