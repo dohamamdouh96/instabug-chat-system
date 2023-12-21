@@ -7,7 +7,7 @@ Back End Challenge
 
 Installation Steps: 
 
-* Clone or download the repo through https://github.com/dohamamdouh96/instabug-chat-system.git
+* Clone or download the repo through https://github.com/dohamamdouh96/chat-system.git
 * Open the terminal and cd chat-system
 * Run command "docker-compose up", this will build:  
   - Mysql
